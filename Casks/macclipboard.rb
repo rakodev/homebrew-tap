@@ -1,6 +1,6 @@
 cask "macclipboard" do
-  version "0.0.3"
-  sha256 "6859688c27ae2ffe93f4961d1ce26b31d3b4a5d3e314bfe8cc06ea2888cb41bc"
+  version "0.0.4"
+  sha256 "ef389cfebcdceb9a1839a2f0ee087abede072df81b51a0f72bb2561ce9206ac3"
 
   url "https://github.com/rakodev/mac-clipboard/releases/download/v#{version}/MacClipboard-Installer.dmg"
   name "MacClipboard"
@@ -15,7 +15,7 @@ cask "macclipboard" do
   depends_on macos: ">= :monterey"
 
   # Quit app before upgrading
-  uninstall quit: "com.macclipboard.MacClipboard"
+  uninstall quit: "com.macclipboard.app"
 
   app "MacClipboard.app"
 
@@ -26,7 +26,7 @@ cask "macclipboard" do
 
   zap trash: [
     "~/Library/Application Support/MacClipboard",
-    "~/Library/Preferences/com.macclipboard.MacClipboard.plist",
-    "~/Library/Caches/com.macclipboard.MacClipboard",
+    "~/Library/Preferences/com.macclipboard.app.plist",
+    "~/Library/Caches/com.macclipboard.app",
   ]
 end
