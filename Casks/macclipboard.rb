@@ -14,7 +14,15 @@ cask "macclipboard" do
 
   depends_on macos: ">= :monterey"
 
+  # Quit app before upgrading
+  uninstall quit: "com.macclipboard.MacClipboard"
+
   app "MacClipboard.app"
+
+  # Relaunch after install
+  postflight do
+    system_command "/usr/bin/open", args: ["-a", "MacClipboard"]
+  end
 
   zap trash: [
     "~/Library/Application Support/MacClipboard",
