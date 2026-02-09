@@ -14,8 +14,9 @@ cask "macclipboard" do
 
   depends_on macos: ">= :monterey"
 
-  # Quit app before upgrading
-  uninstall quit: "com.macclipboard.app"
+  # Quit app before upgrading (signal as fallback for accessory apps)
+  uninstall quit:   "com.macclipboard.app",
+            signal: ["TERM", "com.macclipboard.app"]
 
   app "MacClipboard.app"
 
