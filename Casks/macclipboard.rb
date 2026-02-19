@@ -20,9 +20,22 @@ cask "macclipboard" do
 
   app "MacClipboard.app"
 
-  # Relaunch after install
+  # Always relaunch after install/upgrade.
+  # Guard against stale in-memory old process that may survive quit stanza.
   postflight do
-    system_command "/usr/bin/open", args: ["-a", "MacClipboard"]
+    system_command "/bin/sh",
+                   args: [
+                     "-c",
+                     "if /usr/bin/pgrep -x 'MacClipboard' >/dev/null 2>&1; then " \
+                     "/usr/bin/pkill -TERM -x 'MacClipboard' >/dev/null 2>&1 || true; " \
+                     "/bin/sleep 1; " \
+                     "fi",
+                   ],
+                   must_succeed: false
+
+    system_command "/usr/bin/open",
+                   args: ["-a", "MacClipboard"],
+                   must_succeed: false
   end
 
   zap trash: [
