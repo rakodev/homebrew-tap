@@ -14,27 +14,16 @@ cask "macclipboard" do
 
   depends_on macos: ">= :monterey"
 
-  # Quit app before upgrading (signal as fallback for accessory apps)
-  uninstall quit:   "com.macclipboard.app",
-            signal: ["TERM", "com.macclipboard.app"]
+  # Quit app before upgrading (signal only — quit uses AppleScript which
+  # prints "Unable to find application" on fresh installs)
+  uninstall signal: ["TERM", "com.macclipboard.app"]
 
   app "MacClipboard.app"
 
-  # Always relaunch after install/upgrade.
-  # Guard against stale in-memory old process that may survive quit stanza.
+  # Launch app after install/upgrade
   postflight do
-    system_command "/bin/sh",
-                   args: [
-                     "-c",
-                     "if /usr/bin/pgrep -x 'MacClipboard' >/dev/null 2>&1; then " \
-                     "/usr/bin/pkill -TERM -x 'MacClipboard' >/dev/null 2>&1 || true; " \
-                     "/bin/sleep 1; " \
-                     "fi",
-                   ],
-                   must_succeed: false
-
     system_command "/usr/bin/open",
-                   args: ["-a", "MacClipboard"],
+                   args: ["-a", "/Applications/MacClipboard.app"],
                    must_succeed: false
   end
 
