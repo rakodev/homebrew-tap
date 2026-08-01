@@ -12,23 +12,23 @@ cask "macstats" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :monterey"
-
-  # Quit app before upgrading (signal only — quit uses AppleScript which
-  # prints "Unable to find application" on fresh installs)
-  uninstall signal: ["TERM", "com.macstats.app"]
+  depends_on macos: :monterey
 
   app "MacStats.app"
 
   # Launch app after install/upgrade
   postflight do
     system_command "/usr/bin/open",
-                   args: ["-a", "/Applications/MacStats.app"],
+                   args:         ["-a", "/Applications/MacStats.app"],
                    must_succeed: false
   end
 
+  # Quit app before upgrading (signal only — quit uses AppleScript which
+  # prints "Unable to find application" on fresh installs)
+  uninstall signal: ["TERM", "com.macstats.app"]
+
   zap trash: [
-    "~/Library/Preferences/com.macstats.app.plist",
     "~/Library/Caches/com.macstats.app",
+    "~/Library/Preferences/com.macstats.app.plist",
   ]
 end
