@@ -1,6 +1,6 @@
 cask "macstats" do
-  version "0.1.4"
-  sha256 "7adf3b2083e4b12571536a2e14676774c4a2d0e794a5109650eb31aa4412dfe1"
+  version "0.1.5"
+  sha256 "d21f7335d852bc15641e32865c52c10c7ed3ce026092e4de9bf57ba12f04fd3a"
 
   url "https://github.com/rakodev/mac-stats/releases/download/v#{version}/MacStats-Installer.dmg"
   name "MacStats"
