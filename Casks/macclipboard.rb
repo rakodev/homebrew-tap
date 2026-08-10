@@ -1,6 +1,6 @@
 cask "macclipboard" do
-  version "0.1.23"
-  sha256 "a7ef7fba90692f2bfeb40ede86ba0603a2b54b8bb97a1554e7399f9202e8d0a4"
+  version "0.1.24"
+  sha256 "0d789299df3155ef7fba6d4f8acaeaa3ee33d650f045d97d3466e18821c3acd9"
 
   url "https://github.com/rakodev/mac-clipboard/releases/download/v#{version}/MacClipboard-Installer.dmg"
   name "MacClipboard"
